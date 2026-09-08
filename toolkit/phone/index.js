@@ -20,7 +20,7 @@ import { initPhoneSystem, getPhoneSystem } from './phone-system.js';
 // ========================================
 // [CONST] 常量定义
 // ========================================
-const EXT_ID = 'acsusPawsPuffs';
+const EXT_ID = 'Su-ST-VirtualPhone';
 
 /**
  * 初始化手机系统
