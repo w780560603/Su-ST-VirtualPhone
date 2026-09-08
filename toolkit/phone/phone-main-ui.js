@@ -24,6 +24,7 @@ import { showConfirmPopup } from './utils/popup-helper.js';
 import pageStack from './utils/page-stack-helper.js';
 import { getUserDisplayName } from './utils/contact-display-helper.js';
 import { initTheme } from './utils/theme-manager.js';
+import { renderMomentsFeed } from './moments/moments-feed-ui.js';
 
 /**
  * 渲染手机框架
@@ -539,8 +540,6 @@ async function renderMomentsTab(overlayElement) {
   }
 
   try {
-    const { renderMomentsFeed } = await import('./moments/moments-feed-ui.js');
-
     tabContainer.innerHTML = '';
 
     const feed = await renderMomentsFeed();
@@ -558,6 +557,7 @@ async function renderMomentsTab(overlayElement) {
     console.error('[SuST] 动态页面加载失败:', error);
   }
 }
+
 /**
  * 处理加号菜单项点击
  *
