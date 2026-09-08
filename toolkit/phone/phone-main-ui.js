@@ -211,7 +211,7 @@ async function switchTab(overlayElement, tabName) {
   }
   // 动态ui
   if (tabName === 'moments') {
-  // 动态页面暂时只切换标签，不加载动态内容
+  await renderMomentsTab(overlayElement);
   }
 
   // 更新顶部标题（只修改子元素内容，不破坏两行结构）
@@ -538,13 +538,25 @@ async function renderMomentsTab(overlayElement) {
     return;
   }
 
-  const { renderMomentsFeed } = await import('./moments/moments-feed-ui.js');
+  try {
+    const { renderMomentsFeed } = await import('./moments/moments-feed-ui.js');
 
-  tabContainer.innerHTML = '';
+    tabContainer.innerHTML = '';
 
-  const feed = await renderMomentsFeed();
+    const feed = await renderMomentsFeed();
 
-  tabContainer.appendChild(feed);
+    tabContainer.appendChild(feed);
+  } catch (error) {
+    logger.error('phone', '[PhoneUI] 动态页面加载失败:', error);
+
+    tabContainer.innerHTML = `
+      <div style="padding:20px;color:#c00;">
+        动态加载失败：${String(error?.message || error)}
+      </div>
+    `;
+
+    console.error('[SuST] 动态页面加载失败:', error);
+  }
 }
 /**
  * 处理加号菜单项点击
