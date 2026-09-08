@@ -60,9 +60,6 @@ export function getPhoneFrameHTML() {
 
                         <!-- 动态标签页 -->
                         <div id="tab-moments" class="phone-tab">
-                            <p style="text-align: center; padding: 20px; color: #999;">
-                                空间动态（待实现）
-                            </p>
                         </div>
                     </div>
 

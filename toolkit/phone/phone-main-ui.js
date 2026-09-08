@@ -209,6 +209,10 @@ async function switchTab(overlayElement, tabName) {
   if (tabName === 'contacts') {
     await renderContactListTab(overlayElement);
   }
+  // 动态ui
+  if (tabName === 'moments') {
+  await renderMomentsTab(overlayElement);
+  }
 
   // 更新顶部标题（只修改子元素内容，不破坏两行结构）
   updateHeaderTitle(overlayElement, tabName);
@@ -526,6 +530,22 @@ async function renderContactListTab(overlayElement) {
   }
 }
 
+async function renderMomentsTab(overlayElement) {
+  const tabContainer = overlayElement.querySelector('#tab-moments');
+
+  if (!tabContainer) {
+    logger.warn('phone', '[PhoneUI] 找不到动态标签页容器');
+    return;
+  }
+
+  const { renderMomentsFeed } = await import('./moments/moments-feed-ui.js');
+
+  tabContainer.innerHTML = '';
+
+  const feed = await renderMomentsFeed();
+
+  tabContainer.appendChild(feed);
+}
 /**
  * 处理加号菜单项点击
  *
