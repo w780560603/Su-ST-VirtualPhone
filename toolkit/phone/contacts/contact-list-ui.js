@@ -707,6 +707,10 @@ async function handleAgreeRequest(character, buttonElement) {
     // 2. 标记为已同意
     await markFriendAsAgreed(character.id);
 
+    // 3. 同意后从待处理申请中移除
+    const { removeFromPendingRequests } = await import('./contact-list-data.js');
+    await removeFromPendingRequests(character.id);
+
     // 3. ✅ 添加系统消息："{{user}}添加了你为好友"
     const currentTime = getCurrentTimestamp();
     await addSystemMessage(character.id, {
