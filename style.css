@@ -5,47 +5,10 @@
  * 所有类名都加 paws-puffs- 前缀，避免跟ST的样式冲突
  */
 
-
-/* ========================================
-   导入日记系统CSS
-   ======================================== */
-@import url('toolkit/diary/diary-panel.css');
-@import url('toolkit/diary/diary-editor.css');
-@import url('toolkit/diary/diary-visual-settings.css');
-
 /* ========================================
    导入手机系统CSS
    ======================================== */
 @import url('toolkit/phone/assets/phone.css');
-
-/* ========================================
-   导入美化系统CSS
-   ======================================== */
-
-/* ========================================
-   导入动态变量CSS
-   ======================================== */
-@import url('variables/variables-v2.css');
-@import url('beautify/beautify.css');
-@import url('beautify/beautify-popup.css');
-@import url('beautify/beautify-theme-manager.css');
-
-/* ============================================
-   导入聊天工具CSS
-   ============================================ */
-@import url('chat-tools/chat-tools-fold.css');
-@import url('chat-tools/chat-tools-nav.css');
-@import url('chat-tools/chat-tools-hide.css');
-
-/* ========================================
-   导入聊天记录管理CSS
-   ======================================== */
-@import url('chat-archive/chat-archive.css');
-
-/* ========================================
-   导入节目单样式CSS
-   ======================================== */
-@import url('./program/program.css');
 
 /* ========================================
    预设管理器优化（全局）
