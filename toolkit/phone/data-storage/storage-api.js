@@ -7,7 +7,7 @@ import logger from '../../../logger.js';
 import { extension_settings } from '../../../../../../extensions.js';
 import { saveSettingsDebounced } from '../../../../../../../script.js';
 
-const STORAGE_KEY = 'acsusPawsPuffs';
+const STORAGE_KEY = 'Su-ST-VirtualPhone';
 
 /**
  * 保存数据到 extension_settings
