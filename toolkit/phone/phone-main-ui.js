@@ -621,6 +621,13 @@ async function handleSyncTavernCharacters(overlayElement) {
 
     // 4. 刷新联系人列表（更新"新朋友"徽章数字）
     await renderContactListTab(overlayElement);
+    const newFriendsPage = overlayElement.querySelector('#page-new-friends');
+
+    if (newFriendsPage) {
+      const { renderNewFriendsPage } = await import('./contacts/contact-list-ui.js');
+      const refreshedPage = await renderNewFriendsPage();
+      newFriendsPage.replaceWith(refreshedPage);
+    }
 
     logger.info('phone','[PhoneUI] 同步完成，新增', result.added, '个，总计', result.total, '个');
   } catch (error) {
