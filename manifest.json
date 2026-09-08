@@ -1,12 +1,12 @@
 {
-  "display_name": "Acsus-Paws-Puffs",
+  "display_name": "苏苏小手机",
   "loading_order": 10,
   "requires": [],
   "optional": [],
   "js": "index.js",
   "css": "style.css",
-  "author": "AcSus",
-  "version": "2.0.0",
-  "homePage": "https://github.com/Hmkovo/Acsus-Paws-Puffs",
+  "author": "Su",
+  "version": "1.0.0",
+  "homePage": "https://github.com/w780560603/Su-ST-VirtualPhone",
   "auto_update": true
 }
