@@ -223,7 +223,7 @@ function bindSettingItems(pageElement) {
  * @private
  */
 function updateImageModeDisplay(pageElement) {
-  const mode = extension_settings.acsusPawsPuffs?.phone?.imageMode || 'once';
+  const mode = extension_settings.SuST?.phone?.imageMode || 'once';
   
   const modeText = {
     once: '仅本轮',

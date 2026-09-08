@@ -642,17 +642,17 @@ async function handleResetPresets(page) {
  * @returns {Object} 预设数据
  */
 function getPresetData() {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.promptPreset) {
-    extension_settings.acsusPawsPuffs.phone.promptPreset = getDefaultPresets();
+  if (!extension_settings.SuST.phone.promptPreset) {
+    extension_settings.SuST.phone.promptPreset = getDefaultPresets();
   }
 
-  return extension_settings.acsusPawsPuffs.phone.promptPreset;
+  return extension_settings.SuST.phone.promptPreset;
 }
 
 /**
@@ -661,14 +661,14 @@ function getPresetData() {
  * @param {Object} presets - 预设数据
  */
 function savePresetData(presets) {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
 
-  extension_settings.acsusPawsPuffs.phone.promptPreset = presets;
+  extension_settings.SuST.phone.promptPreset = presets;
   saveSettingsDebounced();
 
   logger.debug('phone','[PresetSettingsUI]] 预设数据已保存');

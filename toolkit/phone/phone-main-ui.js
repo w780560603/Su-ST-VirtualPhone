@@ -657,7 +657,7 @@ async function handleOpenGroupManage(overlayElement) {
  * 处理清空手机数据（临时功能）
  *
  * @description
- * 清空 extension_settings.acsusPawsPuffs.phone 中的所有数据
+ * 清空 extension_settings.SuST.phone 中的所有数据
  * 用于调试和测试，清空后会重新初始化为默认值
  *
  * @async
@@ -684,11 +684,11 @@ async function handleClearPhoneData(overlayElement) {
     }
 
     // 清空 phone 数据
-    if (!extension_settings.acsusPawsPuffs) {
-      extension_settings.acsusPawsPuffs = {};
+    if (!extension_settings.SuST) {
+      extension_settings.SuST = {};
     }
 
-    extension_settings.acsusPawsPuffs.phone = {};
+    extension_settings.SuST.phone = {};
 
     // 保存到服务器
     await saveSettingsDebounced();

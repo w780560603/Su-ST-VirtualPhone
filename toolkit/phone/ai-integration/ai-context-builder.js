@@ -272,7 +272,7 @@ export async function buildMessagesArray(contactId, allPendingMessages) {
   logger.info('phone','[ContextBuilder.buildMessagesArray] 开始构建messages数组 - 主联系人:', contactId);
 
   // ✅ 读取 API 配置源（决定是否使用结构化消息）
-  const apiSource = extension_settings.acsusPawsPuffs?.phone?.apiConfig?.source || 'default';
+  const apiSource = extension_settings.SuST?.phone?.apiConfig?.source || 'default';
   logger.info('phone','[ContextBuilder.buildMessagesArray] API配置源:', apiSource, apiSource === 'custom' ? '（支持多模态数组）' : '（仅支持纯文本）');
 
   // ✅ 提取被触发的联系人ID（有消息的才算触发）
@@ -691,7 +691,7 @@ async function buildAllChatHistoryInfo(triggeredContactIds, messageNumberMap, st
  */
 async function buildCharacterInfo(contact, character, messageNumberMap, startNumber) {
   // 检查是否有角色专属配置
-  const charPromptConfig = extension_settings.acsusPawsPuffs?.phone?.characterPrompts?.[contact.id];
+  const charPromptConfig = extension_settings.SuST?.phone?.characterPrompts?.[contact.id];
 
   if (charPromptConfig && charPromptConfig.items) {
     // 使用角色专属配置构建（传递映射表和编号）
@@ -830,7 +830,7 @@ async function buildChatHistoryStructured(contactId, contact, messageNumberMap, 
   const { formatTimeForAI } = await import('../utils/time-helper.js');
   const { findEmojiById } = await import('../emojis/emoji-manager-data.js');
 
-  const imageMode = extension_settings.acsusPawsPuffs?.phone?.imageMode || 'once';
+  const imageMode = extension_settings.SuST?.phone?.imageMode || 'once';
   logger.debug('phone','[ContextBuilder.buildChatHistoryStructured] imageMode:', imageMode);
 
   // 加载历史记录
@@ -1154,7 +1154,7 @@ export async function buildChatHistoryInfo(contactId, contact, messageNumberMap,
   const sendSettings = getChatSendSettings(contactId);
 
   // ✅ 获取图片识别模式
-  const imageMode = extension_settings.acsusPawsPuffs?.phone?.imageMode || 'once';
+  const imageMode = extension_settings.SuST?.phone?.imageMode || 'once';
   logger.debug('phone','[ContextBuilder.buildChatHistoryInfo] imageMode:', imageMode);
 
   // ✅ 获取当前轮次（用于排除当前轮次的图片，避免重复）
@@ -1572,7 +1572,7 @@ async function buildUserPendingOps(pendingMessages, messageNumberMap, startNumbe
   }
 
   // ✅ 获取图片识别模式设置
-  const imageMode = extension_settings.acsusPawsPuffs?.phone?.imageMode || 'once';
+  const imageMode = extension_settings.SuST?.phone?.imageMode || 'once';
   logger.info('phone','[ContextBuilder.buildUserPendingOps] 图片识别模式:', imageMode);
 
   // ✅ 收集所有待发送的图片消息（用于后续附加到Message对象）
@@ -2001,22 +2001,22 @@ export async function buildHistoryChatInfo(contactId, contact, messageNumberMap)
  * ✅ 每次调用都读取最新数据，确保UI重置后立即生效
  */
 function getPresetData() {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
 
   // ✅ 如果不存在promptPreset，使用统一的默认预设
-  if (!extension_settings.acsusPawsPuffs.phone.promptPreset) {
+  if (!extension_settings.SuST.phone.promptPreset) {
     logger.warn('phone','[ContextBuilder] 预设数据不存在，使用默认预设（来自preset-settings-ui）');
-    extension_settings.acsusPawsPuffs.phone.promptPreset = getDefaultPresets();
+    extension_settings.SuST.phone.promptPreset = getDefaultPresets();
     saveSettingsDebounced();
   }
 
   // ✅ 始终返回 extension_settings 中的最新数据（而非缓存）
-  return extension_settings.acsusPawsPuffs.phone.promptPreset;
+  return extension_settings.SuST.phone.promptPreset;
 }
 
 /**

@@ -32,7 +32,7 @@ import {
 // ========================================
 // [CONST] 常量
 // ========================================
-const EXT_ID = 'acsusPawsPuffs';
+const EXT_ID = 'SuST';
 const MODULE_NAME = 'phone';
 const PARAMS_DEFINITIONS = getParamDefinitions('phone');
 const NO_VALIDATE_SOURCES = new Set(['claude', 'ai21', 'vertexai', 'perplexity', 'zai']);

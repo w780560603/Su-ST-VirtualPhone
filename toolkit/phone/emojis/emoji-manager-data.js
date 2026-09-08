@@ -12,16 +12,16 @@ import logger from '../../../logger.js';
  * @returns {Array<Object>} 表情包数组
  */
 export function getEmojis() {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.emojis) {
-    extension_settings.acsusPawsPuffs.phone.emojis = { items: [] };
+  if (!extension_settings.SuST.phone.emojis) {
+    extension_settings.SuST.phone.emojis = { items: [] };
   }
-  return extension_settings.acsusPawsPuffs.phone.emojis.items;
+  return extension_settings.SuST.phone.emojis.items;
 }
 
 /**
@@ -104,10 +104,10 @@ export async function deleteEmojis(emojiIds) {
   }
 
   // 过滤掉要删除的表情包（从数据中移除）
-  extension_settings.acsusPawsPuffs.phone.emojis.items =
+  extension_settings.SuST.phone.emojis.items =
     emojis.filter(e => !emojiIds.includes(e.id));
 
-  const deletedCount = beforeCount - extension_settings.acsusPawsPuffs.phone.emojis.items.length;
+  const deletedCount = beforeCount - extension_settings.SuST.phone.emojis.items.length;
   logger.info('phone',`[EmojiData] 已删除 ${deletedCount} 个表情包`);
 
   await saveSettingsDebounced();

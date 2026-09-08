@@ -18,15 +18,15 @@ export async function renderImageModeSettings() {
   logger.info('phone','[ImageModeSettings] 开始渲染图片识别模式设置页');
 
   // 确保数据结构存在
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
 
   // 获取当前设置（默认：once - 仅本轮识别）
-  const currentMode = extension_settings.acsusPawsPuffs.phone.imageMode || 'once';
+  const currentMode = extension_settings.SuST.phone.imageMode || 'once';
 
   // 创建文档片段
   const fragment = document.createDocumentFragment();
@@ -142,13 +142,13 @@ function bindEvents(container) {
       option.classList.add('active');
 
       // 保存设置
-      if (!extension_settings.acsusPawsPuffs) {
-        extension_settings.acsusPawsPuffs = {};
+      if (!extension_settings.SuST) {
+        extension_settings.SuST = {};
       }
-      if (!extension_settings.acsusPawsPuffs.phone) {
-        extension_settings.acsusPawsPuffs.phone = {};
+      if (!extension_settings.SuST.phone) {
+        extension_settings.SuST.phone = {};
       }
-      extension_settings.acsusPawsPuffs.phone.imageMode = mode;
+      extension_settings.SuST.phone.imageMode = mode;
       saveSettingsDebounced();
 
       // 触发事件通知用户设置页更新显示

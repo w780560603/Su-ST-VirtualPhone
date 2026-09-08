@@ -752,24 +752,24 @@ async function handleReset(page, contactId) {
  * @returns {Object} 角色提示词数据
  */
 function getCharacterPromptData(contactId) {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.characterPrompts) {
-    extension_settings.acsusPawsPuffs.phone.characterPrompts = {};
+  if (!extension_settings.SuST.phone.characterPrompts) {
+    extension_settings.SuST.phone.characterPrompts = {};
   }
 
   // 如果该角色没有配置，创建默认配置
-  if (!extension_settings.acsusPawsPuffs.phone.characterPrompts[contactId]) {
+  if (!extension_settings.SuST.phone.characterPrompts[contactId]) {
     logger.debug('phone','[CharPromptUI]] 首次打开，创建默认配置');
-    extension_settings.acsusPawsPuffs.phone.characterPrompts[contactId] = createDefaultCharacterPrompt();
+    extension_settings.SuST.phone.characterPrompts[contactId] = createDefaultCharacterPrompt();
     saveSettingsDebounced();
   }
 
-  return extension_settings.acsusPawsPuffs.phone.characterPrompts[contactId];
+  return extension_settings.SuST.phone.characterPrompts[contactId];
 }
 
 /**
@@ -778,17 +778,17 @@ function getCharacterPromptData(contactId) {
  * @param {Object} data - 角色提示词数据
  */
 function saveCharacterPromptData(contactId, data) {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.characterPrompts) {
-    extension_settings.acsusPawsPuffs.phone.characterPrompts = {};
+  if (!extension_settings.SuST.phone.characterPrompts) {
+    extension_settings.SuST.phone.characterPrompts = {};
   }
 
-  extension_settings.acsusPawsPuffs.phone.characterPrompts[contactId] = data;
+  extension_settings.SuST.phone.characterPrompts[contactId] = data;
   saveSettingsDebounced();
 
   logger.debug('phone','[CharPromptUI]] 角色提示词数据已保存');

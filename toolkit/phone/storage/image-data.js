@@ -26,21 +26,21 @@ import { stateManager } from '../utils/state-manager.js';
  * ]
  */
 export function getUploadedImages() {
-    if (!extension_settings.acsusPawsPuffs) {
-        extension_settings.acsusPawsPuffs = {};
+    if (!extension_settings.SuST) {
+        extension_settings.SuST = {};
     }
-    if (!extension_settings.acsusPawsPuffs.phone) {
-        extension_settings.acsusPawsPuffs.phone = {};
+    if (!extension_settings.SuST.phone) {
+        extension_settings.SuST.phone = {};
     }
 
     // 数据迁移：兼容旧版本数组格式
-    if (!extension_settings.acsusPawsPuffs.phone.uploadedImages) {
-        extension_settings.acsusPawsPuffs.phone.uploadedImages = { items: [] };
-    } else if (Array.isArray(extension_settings.acsusPawsPuffs.phone.uploadedImages)) {
+    if (!extension_settings.SuST.phone.uploadedImages) {
+        extension_settings.SuST.phone.uploadedImages = { items: [] };
+    } else if (Array.isArray(extension_settings.SuST.phone.uploadedImages)) {
         // 旧数据是数组格式，迁移到新格式
         logger.warn('phone','[ImageData] 检测到旧数据格式，正在迁移...');
-        const oldData = extension_settings.acsusPawsPuffs.phone.uploadedImages;
-        extension_settings.acsusPawsPuffs.phone.uploadedImages = { items: oldData };
+        const oldData = extension_settings.SuST.phone.uploadedImages;
+        extension_settings.SuST.phone.uploadedImages = { items: oldData };
         logger.info('phone','[ImageData] 数据迁移完成，共', oldData.length, '条记录');
 
         // 【关键修复】立即保存迁移后的数据，避免下次刷新又触发迁移
@@ -48,7 +48,7 @@ export function getUploadedImages() {
         logger.info('phone','[ImageData] 已保存迁移后的数据到配置文件');
     }
 
-    return extension_settings.acsusPawsPuffs.phone.uploadedImages.items;
+    return extension_settings.SuST.phone.uploadedImages.items;
 }
 
 /**
@@ -133,10 +133,10 @@ export async function deleteImages(filenames) {
     }
 
     // 过滤掉要删除的图片（从数据中移除）
-    extension_settings.acsusPawsPuffs.phone.uploadedImages.items =
+    extension_settings.SuST.phone.uploadedImages.items =
         images.filter(img => !filenames.includes(img.filename));
 
-    const deletedCount = beforeCount - extension_settings.acsusPawsPuffs.phone.uploadedImages.items.length;
+    const deletedCount = beforeCount - extension_settings.SuST.phone.uploadedImages.items.length;
     logger.info('phone',`[ImageData] 已删除 ${deletedCount} 条图片记录（文件：成功${successCount}，失败${failCount}）`);
 
     await saveSetting();
@@ -185,7 +185,7 @@ export function findImageById(id) {
  */
 export async function clearAllImages() {
     const count = getUploadedImages().length;
-    extension_settings.acsusPawsPuffs.phone.uploadedImages.items = [];
+    extension_settings.SuST.phone.uploadedImages.items = [];
     await saveSetting();
 
     logger.info('phone','[ImageData] 已清空所有图片记录，数量:', count);

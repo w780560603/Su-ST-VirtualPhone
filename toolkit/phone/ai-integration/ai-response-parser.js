@@ -831,7 +831,7 @@ export function matchContactId(roleName, contacts) {
 
   // ==================== 新增：从持久化存储兜底匹配 ====================
   try {
-    const phoneStore = extension_settings?.acsusPawsPuffs?.phone || {};
+    const phoneStore = extension_settings?.SuST?.phone || {};
 
     // 1) AI感知删除池（aiAwareDeletedFriends）
     const aiAwareList = Array.isArray(phoneStore.aiAwareDeletedFriends)

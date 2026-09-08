@@ -412,7 +412,7 @@ export class PhoneAPI {
       // ✅ 临时绕过酒馆的 image_inlining 开关（2025-11-16新增）
       // 原因：手机的图片识别设置应独立于酒馆的全局设置
       const originalImageInlining = oai_settings.image_inlining;
-      const phoneImageMode = extension_settings.acsusPawsPuffs?.phone?.imageMode || 'once';
+      const phoneImageMode = extension_settings.SuST?.phone?.imageMode || 'once';
 
       // 如果手机需要发送图片（imageMode != 'never'），临时开启酒馆的图片发送
       if (phoneImageMode !== 'never') {
@@ -1314,7 +1314,7 @@ export class PhoneAPI {
    * @returns {Object} 手机设置对象
    */
   getSettings() {
-    const EXT_ID = 'acsusPawsPuffs';
+    const EXT_ID = 'SuST';
     const MODULE_NAME = 'phone';
 
     if (!extension_settings[EXT_ID]) {

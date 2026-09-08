@@ -27,20 +27,20 @@ function getChatKey(contactId) {
  * @private
  */
 function ensurePhoneData() {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.chats) {
-    extension_settings.acsusPawsPuffs.phone.chats = {};
+  if (!extension_settings.SuST.phone.chats) {
+    extension_settings.SuST.phone.chats = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.unreadCounts) {
-    extension_settings.acsusPawsPuffs.phone.unreadCounts = {};
+  if (!extension_settings.SuST.phone.unreadCounts) {
+    extension_settings.SuST.phone.unreadCounts = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.chatRounds) {
-    extension_settings.acsusPawsPuffs.phone.chatRounds = {};
+  if (!extension_settings.SuST.phone.chatRounds) {
+    extension_settings.SuST.phone.chatRounds = {};
   }
 }
 
@@ -61,7 +61,7 @@ export async function loadChatHistory(contactId) {
   ensurePhoneData();
 
   const chatKey = getChatKey(contactId);
-  const chatData = extension_settings.acsusPawsPuffs.phone.chats[chatKey];
+  const chatData = extension_settings.SuST.phone.chats[chatKey];
 
   if (!chatData || !Array.isArray(chatData)) {
     logger.debug('phone', '[ChatData] 聊天记录不存在，返回空数组:', contactId);
@@ -146,12 +146,12 @@ export async function saveChatMessage(contactId, message) {
   const chatKey = getChatKey(contactId);
 
   // 获取现有聊天记录
-  if (!extension_settings.acsusPawsPuffs.phone.chats[chatKey]) {
-    extension_settings.acsusPawsPuffs.phone.chats[chatKey] = [];
+  if (!extension_settings.SuST.phone.chats[chatKey]) {
+    extension_settings.SuST.phone.chats[chatKey] = [];
   }
 
   // 追加消息
-  extension_settings.acsusPawsPuffs.phone.chats[chatKey].push(message);
+  extension_settings.SuST.phone.chats[chatKey].push(message);
 
   // 保存到服务器
   saveSettingsDebounced();
@@ -193,12 +193,12 @@ export async function saveChatMessages(contactId, messages) {
   const chatKey = getChatKey(contactId);
 
   // 获取现有聊天记录
-  if (!extension_settings.acsusPawsPuffs.phone.chats[chatKey]) {
-    extension_settings.acsusPawsPuffs.phone.chats[chatKey] = [];
+  if (!extension_settings.SuST.phone.chats[chatKey]) {
+    extension_settings.SuST.phone.chats[chatKey] = [];
   }
 
   // 批量追加
-  extension_settings.acsusPawsPuffs.phone.chats[chatKey].push(...messages);
+  extension_settings.SuST.phone.chats[chatKey].push(...messages);
 
   // 保存到服务器
   saveSettingsDebounced();
@@ -221,8 +221,8 @@ export async function saveChatMessages(contactId, messages) {
 export async function loadRecentChats() {
   ensurePhoneData();
 
-  const chats = extension_settings.acsusPawsPuffs.phone.chats;
-  const unreadCounts = extension_settings.acsusPawsPuffs.phone.unreadCounts;
+  const chats = extension_settings.SuST.phone.chats;
+  const unreadCounts = extension_settings.SuST.phone.unreadCounts;
   const recentChats = [];
 
   // 遍历所有聊天记录
@@ -259,7 +259,7 @@ export async function clearChatHistory(contactId) {
   ensurePhoneData();
 
   const chatKey = getChatKey(contactId);
-  delete extension_settings.acsusPawsPuffs.phone.chats[chatKey];
+  delete extension_settings.SuST.phone.chats[chatKey];
 
   saveSettingsDebounced();
 
@@ -280,7 +280,7 @@ export async function saveChatHistory(contactId, messages) {
   ensurePhoneData();
 
   const chatKey = getChatKey(contactId);
-  extension_settings.acsusPawsPuffs.phone.chats[chatKey] = messages;
+  extension_settings.SuST.phone.chats[chatKey] = messages;
 
   saveSettingsDebounced();
 
@@ -299,11 +299,11 @@ export async function saveChatHistory(contactId, messages) {
 export function getChatSendSettings(contactId) {
   ensurePhoneData();
 
-  if (!extension_settings.acsusPawsPuffs.phone.chatSendSettings) {
-    extension_settings.acsusPawsPuffs.phone.chatSendSettings = {};
+  if (!extension_settings.SuST.phone.chatSendSettings) {
+    extension_settings.SuST.phone.chatSendSettings = {};
   }
 
-  const settings = extension_settings.acsusPawsPuffs.phone.chatSendSettings[contactId];
+  const settings = extension_settings.SuST.phone.chatSendSettings[contactId];
 
   // 返回默认值或已保存的值
   return {
@@ -326,12 +326,12 @@ export function getChatSendSettings(contactId) {
 export async function updateChatSendSettings(contactId, updates) {
   ensurePhoneData();
 
-  if (!extension_settings.acsusPawsPuffs.phone.chatSendSettings) {
-    extension_settings.acsusPawsPuffs.phone.chatSendSettings = {};
+  if (!extension_settings.SuST.phone.chatSendSettings) {
+    extension_settings.SuST.phone.chatSendSettings = {};
   }
 
-  if (!extension_settings.acsusPawsPuffs.phone.chatSendSettings[contactId]) {
-    extension_settings.acsusPawsPuffs.phone.chatSendSettings[contactId] = {
+  if (!extension_settings.SuST.phone.chatSendSettings[contactId]) {
+    extension_settings.SuST.phone.chatSendSettings[contactId] = {
       recentCount: 20,
       historyCount: 99,
       initialLoadCount: 100
@@ -339,7 +339,7 @@ export async function updateChatSendSettings(contactId, updates) {
   }
 
   // 合并更新
-  Object.assign(extension_settings.acsusPawsPuffs.phone.chatSendSettings[contactId], updates);
+  Object.assign(extension_settings.SuST.phone.chatSendSettings[contactId], updates);
 
   saveSettingsDebounced();
 
@@ -384,7 +384,7 @@ export async function updateMessage(contactId, messageId, updates) {
   ensurePhoneData();
 
   const chatKey = getChatKey(contactId);
-  const chatData = extension_settings.acsusPawsPuffs.phone.chats[chatKey];
+  const chatData = extension_settings.SuST.phone.chats[chatKey];
 
   if (!chatData || !Array.isArray(chatData)) {
     logger.warn('phone', '[ChatData] 聊天记录不存在，无法更新消息:', contactId);
@@ -400,7 +400,7 @@ export async function updateMessage(contactId, messageId, updates) {
   }
 
   // 更新消息（合并字段）
-  extension_settings.acsusPawsPuffs.phone.chats[chatKey][messageIndex] = {
+  extension_settings.SuST.phone.chats[chatKey][messageIndex] = {
     ...chatData[messageIndex],
     ...updates
   };
@@ -479,11 +479,11 @@ export async function addSystemMessage(contactId, systemMessage) {
 export async function getCurrentRound(contactId) {
   ensurePhoneData();
 
-  if (!extension_settings.acsusPawsPuffs.phone.chatRounds[contactId]) {
-    extension_settings.acsusPawsPuffs.phone.chatRounds[contactId] = 1;
+  if (!extension_settings.SuST.phone.chatRounds[contactId]) {
+    extension_settings.SuST.phone.chatRounds[contactId] = 1;
   }
 
-  return extension_settings.acsusPawsPuffs.phone.chatRounds[contactId];
+  return extension_settings.SuST.phone.chatRounds[contactId];
 }
 
 /**
@@ -499,14 +499,14 @@ export async function getCurrentRound(contactId) {
 export async function incrementRound(contactId) {
   ensurePhoneData();
 
-  if (!extension_settings.acsusPawsPuffs.phone.chatRounds[contactId]) {
-    extension_settings.acsusPawsPuffs.phone.chatRounds[contactId] = 1;
+  if (!extension_settings.SuST.phone.chatRounds[contactId]) {
+    extension_settings.SuST.phone.chatRounds[contactId] = 1;
   }
 
-  extension_settings.acsusPawsPuffs.phone.chatRounds[contactId]++;
+  extension_settings.SuST.phone.chatRounds[contactId]++;
   saveSettingsDebounced();
 
-  const newRound = extension_settings.acsusPawsPuffs.phone.chatRounds[contactId];
+  const newRound = extension_settings.SuST.phone.chatRounds[contactId];
   logger.debug('phone', '[ChatData] 轮次递增:', contactId, `现在是第${newRound}轮`);
 
   return newRound;

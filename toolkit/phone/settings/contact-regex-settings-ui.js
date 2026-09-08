@@ -924,18 +924,18 @@ async function handleReset(page, contactId) {
  * @returns {Object} 配置对象
  */
 function getConfig(contactId) {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.contactRegex) {
-    extension_settings.acsusPawsPuffs.phone.contactRegex = {};
+  if (!extension_settings.SuST.phone.contactRegex) {
+    extension_settings.SuST.phone.contactRegex = {};
   }
   
-  if (!extension_settings.acsusPawsPuffs.phone.contactRegex[contactId]) {
-    extension_settings.acsusPawsPuffs.phone.contactRegex[contactId] = {
+  if (!extension_settings.SuST.phone.contactRegex[contactId]) {
+    extension_settings.SuST.phone.contactRegex[contactId] = {
       scripts: {
         global: [],
         preset: [],
@@ -945,7 +945,7 @@ function getConfig(contactId) {
     };
   }
   
-  return extension_settings.acsusPawsPuffs.phone.contactRegex[contactId];
+  return extension_settings.SuST.phone.contactRegex[contactId];
 }
 
 /**
@@ -955,17 +955,17 @@ function getConfig(contactId) {
  * @param {Object} config - 配置对象
  */
 function saveConfig(contactId, config) {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.contactRegex) {
-    extension_settings.acsusPawsPuffs.phone.contactRegex = {};
+  if (!extension_settings.SuST.phone.contactRegex) {
+    extension_settings.SuST.phone.contactRegex = {};
   }
   
-  extension_settings.acsusPawsPuffs.phone.contactRegex[contactId] = config;
+  extension_settings.SuST.phone.contactRegex[contactId] = config;
   saveSettingsDebounced();
   
   logger.debug('phone','[RegexUI] 配置已保存');

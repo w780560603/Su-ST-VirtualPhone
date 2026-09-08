@@ -191,7 +191,7 @@ export function renderPlanStoryMessage(message, contactId, cachedPlan = null) {
     }
 
     // 🔥 通过状态管理器通知订阅者
-    stateManager.set('plans', extension_settings.acsusPawsPuffs.phone.plans, {
+    stateManager.set('plans', extension_settings.SuST.phone.plans, {
       contactId,
       planId: plan.id,
       action: 'update-notes'

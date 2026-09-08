@@ -19,7 +19,7 @@ import { PhoneAPI } from './ai-integration/ai-send-controller.js';
 // ========================================
 // [CONST] 常量定义
 // ========================================
-const EXT_ID = 'acsusPawsPuffs';
+const EXT_ID = 'SuST';
 const MODULE_NAME = 'phone';
 
 // ========================================

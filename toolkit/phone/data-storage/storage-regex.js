@@ -4,7 +4,7 @@
  * 
  * @description
  * 管理每个角色的正则脚本配置（从酒馆同步）
- * 数据存储在 extension_settings.acsusPawsPuffs.phone.contactRegex[contactId]
+ * 数据存储在 extension_settings.SuST.phone.contactRegex[contactId]
  * 
  * 数据结构：
  * {
@@ -33,11 +33,11 @@ import { regexFromString } from '../../../../../../../scripts/utils.js';
  * @returns {Object|null} 正则配置对象，如果不存在返回 null
  */
 export function getContactRegexConfig(contactId) {
-  if (!extension_settings.acsusPawsPuffs?.phone?.contactRegex) {
+  if (!extension_settings.SuST?.phone?.contactRegex) {
     return null;
   }
   
-  return extension_settings.acsusPawsPuffs.phone.contactRegex[contactId] || null;
+  return extension_settings.SuST.phone.contactRegex[contactId] || null;
 }
 
 /**
@@ -47,17 +47,17 @@ export function getContactRegexConfig(contactId) {
  * @param {Object} config - 正则配置对象
  */
 export function saveContactRegexConfig(contactId, config) {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.contactRegex) {
-    extension_settings.acsusPawsPuffs.phone.contactRegex = {};
+  if (!extension_settings.SuST.phone.contactRegex) {
+    extension_settings.SuST.phone.contactRegex = {};
   }
   
-  extension_settings.acsusPawsPuffs.phone.contactRegex[contactId] = config;
+  extension_settings.SuST.phone.contactRegex[contactId] = config;
   saveSettingsDebounced();
   
   logger.debug('phone','[RegexStorage] 正则配置已保存:', contactId);
@@ -69,11 +69,11 @@ export function saveContactRegexConfig(contactId, config) {
  * @param {string} contactId - 联系人ID
  */
 export function deleteContactRegexConfig(contactId) {
-  if (!extension_settings.acsusPawsPuffs?.phone?.contactRegex) {
+  if (!extension_settings.SuST?.phone?.contactRegex) {
     return;
   }
   
-  delete extension_settings.acsusPawsPuffs.phone.contactRegex[contactId];
+  delete extension_settings.SuST.phone.contactRegex[contactId];
   saveSettingsDebounced();
   
   logger.debug('phone','[RegexStorage] 正则配置已删除:', contactId);

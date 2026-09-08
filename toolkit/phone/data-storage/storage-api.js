@@ -7,7 +7,7 @@ import logger from '../../../logger.js';
 import { extension_settings } from '../../../../../../extensions.js';
 import { saveSettingsDebounced } from '../../../../../../../script.js';
 
-const STORAGE_KEY = 'Su-ST-VirtualPhone';
+const STORAGE_KEY = 'SuST';
 
 /**
  * 保存数据到 extension_settings

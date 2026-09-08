@@ -113,7 +113,7 @@ export function initPlanStoryRollbackHandler() {
                 ).join(', '));
 
                 // 🔥 通过状态管理器通知订阅者（自动刷新UI）
-                await stateManager.set('plans', extension_settings.acsusPawsPuffs.phone.plans, {
+                await stateManager.set('plans', extension_settings.SuST.phone.plans, {
                     contactId,
                     action: 'rollback-notes',
                     count: deletedCount

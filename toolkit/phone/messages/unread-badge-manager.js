@@ -32,14 +32,14 @@ import { registerListener } from '../utils/listener-manager.js';
  * @private
  */
 function ensurePhoneData() {
-    if (!extension_settings.acsusPawsPuffs) {
-        extension_settings.acsusPawsPuffs = {};
+    if (!extension_settings.SuST) {
+        extension_settings.SuST = {};
     }
-    if (!extension_settings.acsusPawsPuffs.phone) {
-        extension_settings.acsusPawsPuffs.phone = {};
+    if (!extension_settings.SuST.phone) {
+        extension_settings.SuST.phone = {};
     }
-    if (!extension_settings.acsusPawsPuffs.phone.unreadCounts) {
-        extension_settings.acsusPawsPuffs.phone.unreadCounts = {};
+    if (!extension_settings.SuST.phone.unreadCounts) {
+        extension_settings.SuST.phone.unreadCounts = {};
     }
 }
 
@@ -61,7 +61,7 @@ function ensurePhoneData() {
 export function incrementUnread(contactId) {
     ensurePhoneData();
 
-    const unreadCounts = extension_settings.acsusPawsPuffs.phone.unreadCounts;
+    const unreadCounts = extension_settings.SuST.phone.unreadCounts;
     const prevCount = unreadCounts[contactId] || 0;
     const newCount = prevCount + 1;
 
@@ -90,7 +90,7 @@ export function incrementUnread(contactId) {
 export function clearUnread(contactId) {
     ensurePhoneData();
 
-    const unreadCounts = extension_settings.acsusPawsPuffs.phone.unreadCounts;
+    const unreadCounts = extension_settings.SuST.phone.unreadCounts;
     const prevCount = unreadCounts[contactId] || 0;
 
     if (prevCount > 0) {
@@ -123,7 +123,7 @@ export function clearUnread(contactId) {
  */
 export function getUnread(contactId) {
     ensurePhoneData();
-    return extension_settings.acsusPawsPuffs.phone.unreadCounts[contactId] || 0;
+    return extension_settings.SuST.phone.unreadCounts[contactId] || 0;
 }
 
 /**
@@ -144,7 +144,7 @@ export function getUnread(contactId) {
 export function getTotalUnread() {
     ensurePhoneData();
 
-    const unreadCounts = extension_settings.acsusPawsPuffs.phone.unreadCounts;
+    const unreadCounts = extension_settings.SuST.phone.unreadCounts;
     let total = 0;
 
     for (const contactId in unreadCounts) {
@@ -169,7 +169,7 @@ export function getTotalUnread() {
  */
 export function getAllUnreadCounts() {
     ensurePhoneData();
-    return { ...extension_settings.acsusPawsPuffs.phone.unreadCounts };
+    return { ...extension_settings.SuST.phone.unreadCounts };
 }
 
 /**

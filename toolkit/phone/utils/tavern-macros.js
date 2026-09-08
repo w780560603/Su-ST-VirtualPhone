@@ -230,7 +230,7 @@ function getHistoryMessages() {
 function getMessagesByCharName(type, charName) {
   try {
     // 从持久化存储读取联系人列表
-    const STORAGE_KEY = 'acsusPawsPuffs';
+    const STORAGE_KEY = 'SuST';
     const contacts = extension_settings[STORAGE_KEY]?.phone?.contacts || [];
 
     // 查找匹配的联系人
@@ -264,7 +264,7 @@ function getMessagesByCharName(type, charName) {
 function getContactMessages(type, contactId, contact) {
   try {
     // 从持久化存储读取聊天记录和设置
-    const STORAGE_KEY = 'acsusPawsPuffs';
+    const STORAGE_KEY = 'SuST';
     const chatKey = `chat_${contactId}`;
     const allMessages = extension_settings[STORAGE_KEY]?.phone?.chats?.[chatKey] || [];
     const sendSettings = extension_settings[STORAGE_KEY]?.phone?.chatSendSettings?.[contactId] || {
@@ -447,7 +447,7 @@ function getCurrentTime() {
 function getCurrentWeather() {
   try {
     // 同步读取 extension_settings
-    const STORAGE_KEY = 'acsusPawsPuffs';
+    const STORAGE_KEY = 'SuST';
     const userProfile = extension_settings[STORAGE_KEY]?.phone?.userProfile;
 
     // 检查天气数据是否存在

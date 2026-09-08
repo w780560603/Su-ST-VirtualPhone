@@ -21,17 +21,17 @@ import { stateManager } from '../utils/state-manager.js';
  * @private
  */
 function ensurePlansData() {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.plans) {
-    extension_settings.acsusPawsPuffs.phone.plans = {};
+  if (!extension_settings.SuST.phone.plans) {
+    extension_settings.SuST.phone.plans = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.planHistory) {
-    extension_settings.acsusPawsPuffs.phone.planHistory = {};
+  if (!extension_settings.SuST.phone.planHistory) {
+    extension_settings.SuST.phone.planHistory = {};
   }
 }
 
@@ -43,11 +43,11 @@ function ensurePlansData() {
 export function getPlans(contactId) {
   ensurePlansData();
 
-  if (!extension_settings.acsusPawsPuffs.phone.plans[contactId]) {
-    extension_settings.acsusPawsPuffs.phone.plans[contactId] = [];
+  if (!extension_settings.SuST.phone.plans[contactId]) {
+    extension_settings.SuST.phone.plans[contactId] = [];
   }
 
-  const plans = extension_settings.acsusPawsPuffs.phone.plans[contactId];
+  const plans = extension_settings.SuST.phone.plans[contactId];
   logger.debug('phone','[PlanData.getPlans] 获取计划列表:', contactId, '计划数:', plans.length, '数据:', plans);
   return plans;
 }
@@ -81,7 +81,7 @@ export async function createPlan(contactId, planData) {
 
   // 🔥 持久化去重：检查是否已处理过该消息（支持重新应用）
   if (planData.messageId) {
-    const history = extension_settings.acsusPawsPuffs.phone.planHistory[contactId] || [];
+    const history = extension_settings.SuST.phone.planHistory[contactId] || [];
     const existingRecord = history.find(h => h.msgId === planData.messageId);
 
     if (existingRecord) {
@@ -129,14 +129,14 @@ export async function createPlan(contactId, planData) {
   };
 
   plans.push(plan);
-  extension_settings.acsusPawsPuffs.phone.plans[contactId] = plans;
+  extension_settings.SuST.phone.plans[contactId] = plans;
 
   // 🔥 记录到历史（防止重新应用时重复创建）
   if (planData.messageId) {
-    if (!extension_settings.acsusPawsPuffs.phone.planHistory[contactId]) {
-      extension_settings.acsusPawsPuffs.phone.planHistory[contactId] = [];
+    if (!extension_settings.SuST.phone.planHistory[contactId]) {
+      extension_settings.SuST.phone.planHistory[contactId] = [];
     }
-    extension_settings.acsusPawsPuffs.phone.planHistory[contactId].push({
+    extension_settings.SuST.phone.planHistory[contactId].push({
       planId: plan.id,
       msgId: planData.messageId,
       timestamp: Date.now()
@@ -149,7 +149,7 @@ export async function createPlan(contactId, planData) {
   logger.info('phone','[PlanData] 创建计划:', plan.title, 'ID:', plan.id);
 
   // 🔥 通过状态管理器通知订阅者
-  await stateManager.set('plans', extension_settings.acsusPawsPuffs.phone.plans, {
+  await stateManager.set('plans', extension_settings.SuST.phone.plans, {
     contactId,
     planId: plan.id,
     action: 'create'
@@ -181,7 +181,7 @@ export async function updatePlanStatus(contactId, planId, status) {
   logger.info('phone','[PlanData] 更新计划状态:', plan.title, '→', status);
 
   // 🔥 通过状态管理器通知订阅者
-  await stateManager.set('plans', extension_settings.acsusPawsPuffs.phone.plans, {
+  await stateManager.set('plans', extension_settings.SuST.phone.plans, {
     contactId,
     planId,
     action: 'update'
@@ -225,7 +225,7 @@ export async function updatePlanResult(contactId, planId, result) {
   logger.info('phone','[PlanData] 更新计划结果:', plan.title, '骰子:', plan.diceResult, '结果:', plan.outcome);
 
   // 🔥 通过状态管理器通知订阅者
-  await stateManager.set('plans', extension_settings.acsusPawsPuffs.phone.plans, {
+  await stateManager.set('plans', extension_settings.SuST.phone.plans, {
     contactId,
     planId,
     action: 'update'
@@ -253,11 +253,11 @@ export async function deletePlan(contactId, planId) {
 
   const plan = plans[index];
   plans.splice(index, 1);
-  extension_settings.acsusPawsPuffs.phone.plans[contactId] = plans;
+  extension_settings.SuST.phone.plans[contactId] = plans;
 
   // 🔥 删除历史记录（重要：支持重新应用）
   if (plan.messageId) {
-    const history = extension_settings.acsusPawsPuffs.phone.planHistory[contactId] || [];
+    const history = extension_settings.SuST.phone.planHistory[contactId] || [];
     const historyIndex = history.findIndex(h => h.msgId === plan.messageId);
 
     if (historyIndex !== -1) {
@@ -271,7 +271,7 @@ export async function deletePlan(contactId, planId) {
   logger.info('phone','[PlanData] 删除计划:', plan.title);
 
   // 🔥 通过状态管理器通知订阅者
-  await stateManager.set('plans', extension_settings.acsusPawsPuffs.phone.plans, {
+  await stateManager.set('plans', extension_settings.SuST.phone.plans, {
     contactId,
     planId,
     action: 'delete'

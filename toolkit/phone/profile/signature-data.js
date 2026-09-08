@@ -21,19 +21,19 @@ const USER_SIGNATURE_KEY = 'userSignature';
  * @returns {Object} 配置对象
  */
 function getSignatureHistoryConfig() {
-  if (!extension_settings.acsusPawsPuffs) {
-    extension_settings.acsusPawsPuffs = {};
+  if (!extension_settings.SuST) {
+    extension_settings.SuST = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone) {
-    extension_settings.acsusPawsPuffs.phone = {};
+  if (!extension_settings.SuST.phone) {
+    extension_settings.SuST.phone = {};
   }
-  if (!extension_settings.acsusPawsPuffs.phone.signatureHistory) {
-    extension_settings.acsusPawsPuffs.phone.signatureHistory = {
+  if (!extension_settings.SuST.phone.signatureHistory) {
+    extension_settings.SuST.phone.signatureHistory = {
       displayCount: 3  // 默认显示3条
     };
     saveSettingsDebounced();
   }
-  return extension_settings.acsusPawsPuffs.phone.signatureHistory;
+  return extension_settings.SuST.phone.signatureHistory;
 }
 
 /**
