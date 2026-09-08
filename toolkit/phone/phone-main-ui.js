@@ -211,7 +211,7 @@ async function switchTab(overlayElement, tabName) {
   }
   // 动态ui
   if (tabName === 'moments') {
-  await renderMomentsTab(overlayElement);
+  // 动态页面暂时只切换标签，不加载动态内容
   }
 
   // 更新顶部标题（只修改子元素内容，不破坏两行结构）
