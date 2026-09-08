@@ -10,6 +10,7 @@ import { syncContactDisplayName } from '../utils/contact-display-helper.js';
 import { clearChatHistory, addSystemMessage } from '../messages/message-chat-data.js';
 import { showSuccessToast } from '../ui-components/toast-notification.js';
 import { getCurrentTimestamp } from '../utils/time-helper.js';
+import { refreshNewFriendsPage } from './contact-list-ui.js';
 
 /**
  * 渲染联系人设置页
@@ -473,6 +474,7 @@ async function handleDeleteContact(contact) {
       logger.error('phone','[ContactSettings] 删除联系人失败');
       return;
     }
+    await refreshNewFriendsPage();
 
     // 3. 如果选择删除聊天记录
     if (deleteMessages) {
