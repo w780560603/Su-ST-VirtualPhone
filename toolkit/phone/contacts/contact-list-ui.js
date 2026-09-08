@@ -494,9 +494,17 @@ async function createFriendRequestList() {
 
     // 6. 再显示普通角色申请
     for (const character of characters) {
-      const requestItem = createFriendRequestItem(character, agreedList);
-      listContainer.appendChild(requestItem);
-    }
+      const isAIManaged = aiAwareRequests.some(
+      request => request.contactId === character.id
+    );
+
+  if (isAIManaged) {
+    continue;
+  }
+
+  const requestItem = createFriendRequestItem(character, agreedList);
+  listContainer.appendChild(requestItem);
+}
 
     logger.info('phone','[NewFriends] 好友申请列表创建完成，AI感知:', aiAwareRequests.length, '普通:', characters.length);
     return listContainer;
