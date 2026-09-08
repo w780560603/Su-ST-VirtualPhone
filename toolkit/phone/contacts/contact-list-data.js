@@ -134,7 +134,22 @@ async function deleteContact(contactId) {
 
     // 保存到存储
     await saveData(CONTACTS_KEY, filteredContacts);
-    logger.info('phone','[ContactData] 联系人已删除:', contactId);
+
+    // 从已同意列表中移除，允许以后重新申请
+    const agreedList = await getAgreedFriends();
+    if (agreedList.includes(contactId)) {
+      const newAgreedList = agreedList.filter(id => id !== contactId);
+      await saveData('agreedFriends', newAgreedList);
+    }
+
+// 从待处理申请中移除旧记录
+const pending = await getPendingRequests();
+if (pending.some(request => request.id === contactId)) {
+  const newPending = pending.filter(request => request.id !== contactId);
+  await savePendingRequests(newPending);
+}
+
+logger.info('phone','[ContactData] 联系人已删除:', contactId);
 
     // 触发联系人列表变化事件（通知酒馆宏刷新）
     triggerContactListChanged();

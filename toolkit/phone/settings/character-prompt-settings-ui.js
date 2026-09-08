@@ -561,7 +561,7 @@ async function handleAddFromWorldbook(page, contactId) {
 
     selected.forEach(entry => {
       // 检查是否已存在
-      const exists = data.items.some(i => i.type === 'worldbook' && i.entryUid === entry.uid);
+      const exists = data.items.some(i => i.type === 'worldbook' && i.entryUid === entry.uid && i.worldbookName === entry.worldbookName);
       if (exists) {
         logger.debug('phone','[CharPromptUI]] 条目已存在，跳过:', entry.comment);
         return;
